@@ -18,6 +18,8 @@ public class ventana extends JFrame {
 	
 	ventana(){
 		 super("ELECTRODOMESTICOS UDEC");
+		 listProductos= new ArrayList<DatosProductos>();
+		 listPersona = new ArrayList<DatosPersonas>();
 		 iniciar();
 		 componente();
 		 setVisible(true);

@@ -12,8 +12,10 @@ public class AgregarProducto extends JFrame {
 	private JComboBox jcbnombre,jcbmarca;
 	private ventana referenciaVentaPrincipal;
 	
-	public AgregarProducto () {
+	public AgregarProducto (ventana _referenciaVentaPrincipal) {
 		super("AGREGAR PRODUCTOS");
+		referenciaVentaPrincipal=_referenciaVentaPrincipal;
+
 		
 		this.iniciar(); //Configurar mi JFRAME
 		this.configurarComponentes();

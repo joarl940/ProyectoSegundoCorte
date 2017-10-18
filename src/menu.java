@@ -66,7 +66,7 @@ public class menu extends JPanel implements ActionListener {
 		 
 		 	if( comando.equals( "agregar" ) )
 	        {
-		 		AgregarProducto agregar=new AgregarProducto();
+		 		AgregarProducto agregar=new AgregarProducto(null);
 		 		agregar.setVisible(true);
 		 		
 	        }
