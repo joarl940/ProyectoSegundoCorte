@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 public class menu extends JPanel implements ActionListener {
 	private JButton btnproductos,btninventario,btnalerta,btnregcliente,	btnlistcliente,
 	btnmejorclien,btncompra,btneliminar;
+	private ventana referenciaVentaPrincipal;
 	
 	public menu() {
 		
@@ -67,6 +68,7 @@ public class menu extends JPanel implements ActionListener {
 	        {
 		 		AgregarProducto agregar=new AgregarProducto();
 		 		agregar.setVisible(true);
+		 		
 	        }
 		 	
 			if( comando.equals( "inventario" ) )

@@ -10,7 +10,8 @@ public class ventana extends JFrame {
 	Titulo titulo;
 	menu menu;
 	Menuabajo abajo;
-	Visualizador vista;
+	VisualizadorProductos vista;
+	VisualizadorClientes vistaC;
 	//PanelCentro panelCentro;
 	//PanalIzquierdo panelOpciones;
 //	PanelDerecho panelDerecho;
@@ -51,11 +52,12 @@ public class ventana extends JFrame {
        menu = new menu();
         add( menu, BorderLayout.WEST );
 
-       vista = new Visualizador();
-        add( vista, BorderLayout.CENTER );
+       vista = new VisualizadorProductos();
+      add( vista, BorderLayout.CENTER );
+        
+      //  vistaC = new VisualizadorClientes();
+       // add( vistaC, BorderLayout.CENTER );
 
-    //panelOpciones = new PanalIzquierdo(null, null);
-     //add( panelOpciones, BorderLayout.WEST );
         
       abajo = new Menuabajo();
       add( abajo, BorderLayout.SOUTH );
@@ -67,6 +69,14 @@ public class ventana extends JFrame {
 	}
 	public void actualizarTabla() {
 		vista.refrescarLista(listProductos);
+	}
+	public void  agregarCliente(String _nombre, String _apellido,int _cedula,int _edad,double _sueldo,String _empresa,String _foto) {
+		DatosPersonas cliente = new DatosPersonas(_nombre,_apellido,_cedula,_edad,_empresa,_sueldo,_foto);
+     listPersona.add(cliente);
+		actualizarTabla();
+	}
+	public void actualizarTablaC() {
+		vistaC.refrescarLista(listPersona);
 	}
 	
 	

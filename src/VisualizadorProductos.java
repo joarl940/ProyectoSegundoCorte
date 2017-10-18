@@ -9,18 +9,18 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-public class Visualizador extends JPanel {
+public class VisualizadorProductos extends JPanel {
 	private DefaultTableModel referencia_tabla_model;
 	public String [] columnas = {"Nombre","Marca","Peso","valor","Cantidad"};
 	private Object[][] tableContents;
 	private JTable tabla_Productos;
 	
- public Visualizador() {
+ public VisualizadorProductos() {
 	// TODO Auto-generated constructor stub
 
 		
 		setLayout(new BorderLayout());		
-		Border borde1 = BorderFactory.createTitledBorder("VISUALIZADOR");
+		Border borde1 = BorderFactory.createTitledBorder("VISUALIZADOR PRODUCTOS");
 		setBorder (borde1);
 		tableContents = new Object[0][0];
 		referencia_tabla_model = new DefaultTableModel(tableContents, columnas);

@@ -24,6 +24,7 @@ public class RegistrarCliente extends JFrame  {
 	private JTextField txtpeso,txtvalor;
 	private JTextField txtnombre,txtapellido,txtcedula,txtedad,txtempresa,txtsueldo;
 	private File fichero;
+	private ventana referenciaVentaPrincipalC;
 	
 	public RegistrarCliente () {
 		super("REGISTRAR CLIENTES");
@@ -83,8 +84,15 @@ private void configurarComponentes() {
 		txtsueldo.setBounds(70,150,250,20);
 		contentPane.add(txtsueldo);
 		
+		JLabel empresa= new JLabel("Empresa:");
+		empresa.setBounds(10, 180, 60, 20);
+		contentPane.add(empresa);
+		txtempresa=new JTextField(10);
+		txtempresa.setBounds(70,180,250,20);
+		contentPane.add(txtempresa);
+		
 		JLabel foto= new JLabel("FOTO:");
-		foto.setBounds(70, 180, 100, 100);
+		foto.setBounds(70, 210, 100, 100);
 		contentPane.add(foto);
 		btnfoto=new JButton("CARGAR FOTO");
 		btnfoto.setBounds(100,300,150,40);
@@ -101,7 +109,7 @@ private void configurarComponentes() {
 		btnfoto.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JFileChooser fc = new JFileChooser( "./data" );
-	            fc.setDialogTitle( "Buscar imagen de perro" );
+	            fc.setDialogTitle( "Buscar imagen cliente" );
 	            fc.setMultiSelectionEnabled( false );
 	            FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG","jpg","png");
 	            fc.setFileFilter(filtro);
@@ -125,6 +133,24 @@ private void configurarComponentes() {
 	            }
 			
 	          			
+			}
+		);
+		btnagregar.addActionListener (new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			String nombre=txtnombre.getText();
+			String apellido=txtapellido.getText();
+			int cedula =Integer.parseInt(txtcedula.getText());
+			int edad=Integer.parseInt(txtedad.getText());
+			String empresa=txtempresa.getText();
+			double sueldo=Double.parseDouble(txtsueldo.getText());
+		    String foto=fichero.toString();
+		    
+		    referenciaVentaPrincipalC.agregarCliente(nombre,apellido,cedula,edad,sueldo,empresa,foto);
+			JOptionPane.showMessageDialog(null,"Producto agregado. ","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+		
+		    
+				
+			}
 			}
 		);
 		
