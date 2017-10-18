@@ -87,15 +87,15 @@ private void configurarComponentes() {
 		foto.setBounds(70, 180, 100, 100);
 		contentPane.add(foto);
 		btnfoto=new JButton("CARGAR FOTO");
-		btnfoto.setBounds(70,300,200,20);
+		btnfoto.setBounds(100,300,150,40);
 		contentPane.add(btnfoto);
 		
 		btnagregar=new JButton("REGISTAR");
-		btnagregar.setBounds(10,330,100,20);
+		btnagregar.setBounds(20,360,100,40);
 		contentPane.add(btnagregar);
 		
 		btnvolver=new JButton("VOLVER");
-		btnvolver.setBounds(150,330,100,20);
+		btnvolver.setBounds(210,360,100,40);
 		contentPane.add(btnvolver);
 		
 		btnfoto.addActionListener (new ActionListener(){

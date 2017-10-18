@@ -1,12 +1,16 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 
 
 public class AgregarProducto extends JFrame {
 	private JButton btnagregar,btnvolver;
-	private JTextField txtpeso,txtvalor;
+	private JTextField txtpeso,txtvalor, txtcantidad;
 	private JComboBox jcbnombre,jcbmarca;
+	private ventana referenciaVentaPrincipal;
 	
 	public AgregarProducto () {
 		super("AGREGAR PRODUCTOS");
@@ -60,16 +64,38 @@ public class AgregarProducto extends JFrame {
 		txtvalor.setBounds(10,240,250,20);
 		contentPane.add(txtvalor);
 		
+		JLabel cantidad = new JLabel("cantidad.");
+		cantidad.setBounds(10, 270, 250, 20);
+		contentPane.add(cantidad);
+		txtcantidad=new JTextField(10);
+		txtcantidad.setBounds(10,300,250,20);
+		contentPane.add(txtcantidad);
+		
 		
 		btnagregar=new JButton("AGREGAR");
-		btnagregar.setBounds(10,270,100,20);
+		btnagregar.setBounds(10,335,100,40);
 		contentPane.add(btnagregar);
 		
 		btnvolver=new JButton("VOLVER");
-		btnvolver.setBounds(150,270,100,20);
+		btnvolver.setBounds(210,335,100,40);
 		contentPane.add(btnvolver);
-		
-		
+			
 	
-	}
+
+	btnagregar.addActionListener (new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		// TODO Auto-generated method stub
+		String nombre=(String)jcbnombre.getSelectedItem();
+		String marca=(String)jcbmarca.getSelectedItem();	
+		int cantidad=Integer.parseInt(txtcantidad.getText());
+		double valor=Double.parseDouble(txtvalor.getText());
+		double peso=Double.parseDouble(txtpeso.getText());
+	
+		referenciaVentaPrincipal.agregarProducto(nombre, marca,peso, valor, cantidad);
+		JOptionPane.showMessageDialog(null,"Producto agregado. ","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+	
+	
 }
+}
+	);
+}}
