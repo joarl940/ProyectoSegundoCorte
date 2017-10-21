@@ -16,7 +16,9 @@ public class VisualizadorProductos extends JPanel {
 	private JTable tabla_Productos;
 	
  public VisualizadorProductos() {
-	// TODO Auto-generated constructor stub
+	/**
+	 * creacion del panel para agregar la tabla
+	 */
 
 		
 		setLayout(new BorderLayout());		
@@ -27,9 +29,16 @@ public class VisualizadorProductos extends JPanel {
 		tabla_Productos = new JTable(referencia_tabla_model);
 		this.add(new JScrollPane(tabla_Productos), BorderLayout.CENTER);
 }
-	public void refrescarLista(ArrayList<DatosProductos> referenciaArraList) {
-		
-		if(referenciaArraList.isEmpty()) {
+ /**
+  * 
+  * @param referenciaArraList
+  * recibe el arrayList de productos para agregarlos a la tabla
+  */
+	public void refrescarLista(ArrayList<DatosProductos> referenciaArraList)
+	{
+	
+		if(referenciaArraList.isEmpty()) 
+		{
 			JOptionPane.showMessageDialog(null, "No hay elementos en el arraylist","Mensaje",JOptionPane.WARNING_MESSAGE);
 		}
 		else {		

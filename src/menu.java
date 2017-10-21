@@ -1,3 +1,7 @@
+/**
+ * Clase menu 
+ * contiene el menu princial que se verá en la ventana principal.
+ */
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,11 +16,16 @@ public class menu extends JPanel implements ActionListener {
 	btnmejorclien,btncompra,btneliminar;
 	private ventana referenciaVentaPrincipal;
 	
-	public menu() {
-		
+	public menu(ventana _referencia) {
+		referenciaVentaPrincipal=_referencia;
 		this.iniciar();
 	}
-	private void iniciar() {
+	private void iniciar()
+	{
+		
+		/**
+		 * creacion de los componentes del panel 
+		*/
 		setBorder( new TitledBorder( "MENU" ) );
 		this.setLayout(new GridLayout(8, 1));
 		btnproductos = new JButton("Agregar Productos");	
@@ -37,7 +46,9 @@ public class menu extends JPanel implements ActionListener {
 		this.add(btncompra);
 		this.add(btneliminar);
 		
-		
+		/**
+		 * define los tipos de action para los eventos de cada boton
+		 */
 		btnproductos.setActionCommand( "agregar" );
 		btnproductos.addActionListener(this);
 		
@@ -61,25 +72,35 @@ public class menu extends JPanel implements ActionListener {
 	}
 	
 	@Override
+	/**
+	 * eventos de los botones 
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		 String comando = arg0.getActionCommand( );
 		 
 		 	if( comando.equals( "agregar" ) )
 	        {
-		 		AgregarProducto agregar=new AgregarProducto(null);
+		 		/**
+		 		 * llamado al Jframe para agregar el producto
+		 		 */
+		 		AgregarProducto agregar=new AgregarProducto(referenciaVentaPrincipal);
 		 		agregar.setVisible(true);
 		 		
 	        }
 		 	
 			if( comando.equals( "inventario" ) )
 	        {
+			
 	        }
 			if( comando.equals( "alerta" ) )
 	        {
 	        }
 			if( comando.equals( "registro" ) )
 	        {
-				RegistrarCliente agregar=new RegistrarCliente();
+				/**
+				 * llamado al jframe para el registro del cliente
+				 */
+				RegistrarCliente agregar=new RegistrarCliente(referenciaVentaPrincipal);
 		 		agregar.setVisible(true);	
 	        }
 			if( comando.equals( "mejor" ) )

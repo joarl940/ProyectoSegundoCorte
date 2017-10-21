@@ -35,7 +35,7 @@ public class VisualizadorClientes  extends JPanel{
 			else {		
 				
 	 
-				tableContents = new Object[referenciaArraList.size()][6];
+				tableContents = new Object[referenciaArraList.size()][7];
 				  for (int i=0 ; i<referenciaArraList.size() ; i++) {
 					tableContents[i][0] = referenciaArraList.get(i).getNombre();
 					tableContents[i][1] = referenciaArraList.get(i).getApellido();

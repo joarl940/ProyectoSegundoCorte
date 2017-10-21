@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.LineNumberInputStream;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class ventana extends JFrame {
 	
 	public ventana iniciar(){  //configura el jframer
 				
-				Dimension dims = new Dimension(800, 600);
+				Dimension dims = new Dimension(1000, 700);
 				this.setSize(dims);
 				this.setPreferredSize(dims);
 				/*
@@ -51,14 +52,14 @@ public class ventana extends JFrame {
 		titulo = new Titulo( );
         add( titulo, BorderLayout.NORTH );
 
-       menu = new menu();
+       menu = new menu(this);
         add( menu, BorderLayout.WEST );
 
        vista = new VisualizadorProductos();
       add( vista, BorderLayout.CENTER );
         
-      //  vistaC = new VisualizadorClientes();
-       // add( vistaC, BorderLayout.CENTER );
+        vistaC = new VisualizadorClientes();
+        add( vistaC, BorderLayout.EAST );
 
         
       abajo = new Menuabajo();
@@ -67,19 +68,37 @@ public class ventana extends JFrame {
 	public void  agregarProducto(String _nombreP, String _marca,double _peso,double _valor,int _cantidad) {
 		DatosProductos productos = new DatosProductos(_nombreP, _marca, _peso, _valor, _cantidad);
      listProductos.add(productos);
-		actualizarTabla();
+	actualizarTabla();
 	}
 	public void actualizarTabla() {
 		vista.refrescarLista(listProductos);
 	}
-	public void  agregarCliente(String _nombre, String _apellido,int _cedula,int _edad,double _sueldo,String _empresa,String _foto) {
+	public boolean  agregarCliente(String _nombre, String _apellido,int _cedula,int _edad,double _sueldo,String _empresa,String _foto) {
+		 int paso=buscarCliente(_cedula);
+	        boolean var=false;
+	        if(paso==-1){
 		DatosPersonas cliente = new DatosPersonas(_nombre,_apellido,_cedula,_edad,_empresa,_sueldo,_foto);
      listPersona.add(cliente);
-		actualizarTabla();
+		actualizarTablaC();
+		var=true;
+	        }
+	        return var;
 	}
 	public void actualizarTablaC() {
 		vistaC.refrescarLista(listPersona);
 	}
-	
+	 public int buscarCliente(int cedula){
+		    int posicion=-1;
+		    boolean termine=false;
+		    for(int i=0;i<listPersona.size()&&!termine;i++){
+		    DatosPersonas clienteP=(DatosPersonas)listPersona.get(i);
+		     int cedulaaux=clienteP.getCedula();
+		    if(cedulaaux==cedula){
+		    posicion=1;
+		    termine=true;
+		    }    
+		    }
+		    return posicion;
+		    }
 	
 }

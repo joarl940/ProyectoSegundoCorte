@@ -1,10 +1,12 @@
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.FocusManager;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,15 +21,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class RegistrarCliente extends JFrame  {
+public class RegistrarCliente extends JFrame implements ActionListener {
 	private JButton btnagregar,btnvolver,btnfoto;
-	private JTextField txtpeso,txtvalor;
 	private JTextField txtnombre,txtapellido,txtcedula,txtedad,txtempresa,txtsueldo;
 	private File fichero;
 	private ventana referenciaVentaPrincipalC;
-	
-	public RegistrarCliente () {
+	//private ventana buscar=new ventana();
+	public RegistrarCliente (ventana _referenciaC) {
 		super("REGISTRAR CLIENTES");
+		referenciaVentaPrincipalC=_referenciaC;
 		
 		this.iniciar(); //Configurar mi JFRAME
 		this.configurarComponentes();
@@ -106,6 +108,15 @@ private void configurarComponentes() {
 		btnvolver.setBounds(210,360,100,40);
 		contentPane.add(btnvolver);
 		
+		btnagregar.setActionCommand( "agregar" );
+		btnagregar.addActionListener(this);
+		
+		btnvolver.setActionCommand( "volver" );
+		btnvolver.addActionListener(this);
+		
+		btnfoto.setActionCommand( "foto" );
+		btnfoto.addActionListener(this);
+		
 		btnfoto.addActionListener (new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JFileChooser fc = new JFileChooser( "./data" );
@@ -127,36 +138,81 @@ private void configurarComponentes() {
 	            		foto.setIcon( icono );
 	            		}catch(Exception ex){
 	            			JOptionPane.showMessageDialog(null, "Error abriendo la imagen "+ ex);
-	            					}
 	            		}
+	            	}
 	            }
-	            }
+			}});
 			
-	          			
-			}
-		);
-		btnagregar.addActionListener (new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+}
+		public void actionPerformed(ActionEvent arg0) {
+			 String comando = arg0.getActionCommand( );
+			 
+			 if( comando.equals( "agregar" ) )
+				        {
+				 try {
 			String nombre=txtnombre.getText();
 			String apellido=txtapellido.getText();
 			int cedula =Integer.parseInt(txtcedula.getText());
 			int edad=Integer.parseInt(txtedad.getText());
 			String empresa=txtempresa.getText();
 			double sueldo=Double.parseDouble(txtsueldo.getText());
-		    String foto=fichero.toString();
+		   
+			String foto=fichero.toString();
+		    //String foto=txtnombre.getText();;
+		    if(txtnombre==null||txtnombre.equals("")){
+	            JOptionPane.showMessageDialog(this,"NOMBRE DEL CLIENTE INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	            txtnombre.setText("");
+		    }else if(txtapellido==null||txtapellido.equals("")){
+	            JOptionPane.showMessageDialog(this,"APELLIDO DEL CLIENTE INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	           txtapellido.setText(""); 
+		    }else if(txtcedula==null||txtcedula.equals("")){
+	            JOptionPane.showMessageDialog(this,"CEDULA DEL CLIENTE INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	          txtcedula.setText("");
+		    }else  if(txtempresa==null||txtempresa.equals("")){
+	                JOptionPane.showMessageDialog(this,"EMPRESA INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	       txtempresa.setText("");    
+		    }	else  if(txtsueldo==null||txtsueldo.equals("")){
+	            JOptionPane.showMessageDialog(this,"SUELDO INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	        txtsueldo.setText("");    
+		    }else if(foto==null||foto.equals("")){
+	            JOptionPane.showMessageDialog(this,"FOTO INCORRECTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+	           
+		    }else  {
 		    
-		    referenciaVentaPrincipalC.agregarCliente(nombre,apellido,cedula,edad,sueldo,empresa,foto);
-			JOptionPane.showMessageDialog(null,"Producto agregado. ","Mensaje",JOptionPane.INFORMATION_MESSAGE);
-		
+		    	
+		    boolean paso=referenciaVentaPrincipalC.agregarCliente(nombre,apellido,cedula,edad,sueldo,empresa,foto);
+			if(paso) {
+		    JOptionPane.showMessageDialog(null,"Cliente agregado. ","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+	        txtnombre.setText("");
+	        txtapellido.setText("");
+	        txtcedula.setText("");
+	        txtedad.setText("");
+	        txtempresa.setText("");
+	        txtsueldo.setText("");
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "cliente ya registrado","error",JOptionPane.ERROR_MESSAGE);
+			}
+	        
+		    }
+		    }catch (NumberFormatException e) {
+			            JOptionPane.showMessageDialog(this,"DATOS INCORRECTOS ","ERROR",JOptionPane.ERROR_MESSAGE);
+
+			// TODO: handle exception
+		}
 		    
 				
 			}
+					 	
+					 	if( comando.equals( "volver" ) )
+				        {
+				Window v=FocusManager.getCurrentManager().getActiveWindow();
+				v.setVisible(false);
+		    
+				
 			}
-		);
-		
-		
+			
+
 
 }
-
-
 }

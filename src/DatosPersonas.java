@@ -8,6 +8,10 @@ public class DatosPersonas {
 	private double sueldo;
 	private String foto;
 	
+	  
+	
+	//  constructor de la clase DatosPeronas
+	 
 	public DatosPersonas(String _nombre,String _apellido,int _cedula,int _edad,String _empresa,double _sueldo,String foto) {
 	this.setNombre(_nombre);
 	this.setApellido(_apellido);
@@ -18,6 +22,10 @@ public class DatosPersonas {
 	this.setFoto(foto);
 		
 	}
+
+	 
+	 // metodos get y set para el control de los datos recibir y enviar
+	 
 	public String getNombre() {
 		return nombre;
 	}
